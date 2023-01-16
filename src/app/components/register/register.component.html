@@ -1,0 +1,80 @@
+<section class="container">
+  <section class="row d-flex justify-content-center">
+    <article class="col-5 flex-column p-3">
+      <h2 class="text-center">REGISTRO DE PERSONAS</h2>
+      <form action="" class="shadow p-3" #formulario="ngForm">
+        <section class="input-group mt-2">
+          <label for="nombre" class="input-group-text">Nombre: </label>
+          <input
+            type="text"
+            class="form-control"
+            name="nombre"
+            [(ngModel)]="registro.nombre"
+            required
+            minlength="5"
+            #nombre="ngModel">
+        </section>
+
+
+          <!--Validacion -->
+          <section *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="alert mt-2 alert-danger">
+            <section *ngIf="nombre.errors?.['required']">
+              El campo es requerido
+            </section>
+
+          <section *ngIf="nombre.errors?.['minlength']">
+            El campo nombre debe tener mas de 5 digitos
+          </section>
+        </section>
+
+        <section class="input-group mt-3">
+          <label for="dni" class="input-group-text">Dni: </label>
+          <input
+            type="number"
+            class="form-control"
+            name="dni"
+            pattern="[0-9]{8}"
+            [(ngModel)]="registro.dni"
+            required
+            #dni="ngModel">
+          </section>
+
+          <!--Validacion -->
+          <section *ngIf="dni.invalid && (dni.dirty || dni.touched)" class="alert mt-2 alert-danger">
+              <section *ngIf="dni.errors?.['required']">
+                El campo de dni es requerido
+            </section>
+            <section *ngIf="dni.errors?.['pattern']">
+              El campo de dni solo debe tener 8 digitos
+          </section>
+
+        </section>
+
+        <section class="input-group mt-3">
+          <label for="estado" class="input-group-text">Estado: </label>
+          <select
+            class="form-control"
+            name="estado"
+            [(ngModel)]="registro.estado">
+            <option *ngFor="let item of estado_arre" value="{{item.value}}">{{item.texto}}</option>
+          </select>
+        </section>
+
+        <section class="input-group mt-3 d-flex justify-content-center">
+          <input
+            type="submit"
+            value="Validar"
+            class="btn btn-primary"
+            (click)="onSubmit()"
+            [disabled]="!formulario.valid"
+            >
+        </section>
+
+      </form>
+    </article>
+
+
+      <app-hijo-arre [datos]="registroArre" [datosPadreArre]="registro" [validacion]="formulario"></app-hijo-arre>
+
+  </section>
+</section>

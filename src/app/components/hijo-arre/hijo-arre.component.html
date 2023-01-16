@@ -1,0 +1,9 @@
+<article class="row d-flex justify-content-center">
+  <section *ngIf="validacion.valid;" class="col-5 flex-column p-3">
+    <pre class="alert alert-primary">{{datosPadreArre|json}}</pre>
+    <section class="flex-column p-3" *ngIf="datos.length>2">
+      <pre class="alert alert-success">{{datos | json}}</pre>
+    </section>
+  </section>
+
+</article>
